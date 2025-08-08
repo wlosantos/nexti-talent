@@ -110,7 +110,7 @@ jobs:
             ${{ runner.os }}-gems-
 
       - name: Instalar dependências
-        run: bundle install --with development
+        run: bundle install
 
       - name: Security audit dependencies
         run: bundle exec bundler-audit --update

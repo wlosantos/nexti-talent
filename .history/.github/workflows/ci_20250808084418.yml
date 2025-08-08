@@ -88,9 +88,6 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     
-    env:
-      RAILS_ENV: development
-    
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -110,7 +107,7 @@ jobs:
             ${{ runner.os }}-gems-
 
       - name: Instalar dependências
-        run: bundle install --with development
+        run: bundle install
 
       - name: Security audit dependencies
         run: bundle exec bundler-audit --update
@@ -158,13 +155,13 @@ jobs:
       - name: Setup databases
         run: |
           bin/rails db:create
-          bin/rails db:migrate
+          bin/rails db:schema:load
           bin/rails db:create:cache
-          bin/rails db:migrate:cache
+          bin/rails db:schema:load:cache
           bin/rails db:create:queue
-          bin/rails db:migrate:queue
+          bin/rails db:schema:load:queue
           bin/rails db:create:cable
-          bin/rails db:migrate:cable
+          bin/rails db:schema:load:cable
 
       - name: Precompile assets
         run: bin/rails assets:precompile
