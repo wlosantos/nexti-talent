@@ -1,0 +1,32 @@
+name: Deploy to Main
+
+on:
+  push:
+    branches: ["main"]
+
+env:
+  RAILS_ENV: production
+
+jobs:
+  deploy-check:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Verify CI passed on develop
+        run: |
+          echo "🚀 Deploy triggered for main branch"
+          echo "This workflow runs after merge from develop to main"
+          
+      # Aqui você pode adicionar steps de deploy real:
+      # - Deploy para staging/production
+      # - Notificações
+      # - Rollback automático em caso de falha
+      # - etc.
+      
+      - name: Placeholder for deployment
+        run: |
+          echo "✅ Ready for production deployment"
+          echo "Add your deployment steps here"
